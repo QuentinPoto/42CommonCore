@@ -14,10 +14,10 @@
 
 // TODO pk la fonction f prend un int ???
 
-char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char		*res;
-	unsigned int 	i;
+	char			*res;
+	unsigned int	i;
 
 	res = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (res == NULL)
@@ -32,7 +32,6 @@ char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	return (res);
 }
 
-
 /*
  *
  * #1.  The string on which to iterate.
@@ -41,7 +40,7 @@ char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
  * Return value : The string created from the successive applications
  * of ’f’.  Returns NULL if the allocation fails.
  *
- * Applies the function ’f’ to each character of the string ’s’ to create a new string (with malloc(3))
- * resulting from successive applications of ’f
+ * Applies the function ’f’ to each character of the string ’s’ to create
+ * a new string (with malloc(3)) resulting from successive applications of ’f
  *
  */

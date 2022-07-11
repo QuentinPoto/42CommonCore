@@ -10,20 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "libft.h"
 
-int ft_atoi(char *string)
+int	ft_atoi(char *string)
 {
 	long int	result;
-	int 		i;
+	int			i;
 	int			minus;
 
 	result = 0;
 	i = 0;
 	minus = 1;
-	while (ft_is_in_charset(string[i], " \t\n\r\b")) // TODO : check les isspace
+	// TODO : check les isspace
+	while (ft_is_in_charset(string[i], " \t\n\r\b"))
 		i++;
 	if (string[i] == '-')
 	{

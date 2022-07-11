@@ -10,21 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "libft.h"
 
-void	*ft_calloc(size_t n,size_t s)
+void	*ft_calloc(size_t n, size_t s)
 // TODO : pas sur que le laisser en int marche partout...
 {
-	int *res;
+	int		*res;
 
 	res = malloc(n * s);
 	if (res == NULL)
 		return (NULL);
 	while (n > 0)
 	{
-		res[n-1] = 0;
+		res[n - 1] = 0;
 		n--;
 	}
 	return (res);

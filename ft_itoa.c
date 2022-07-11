@@ -22,8 +22,7 @@ static char *char_to_str(char c)
 	return (res);
 }
 
-
-char *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char			*res;
 	unsigned int	ten_factor;

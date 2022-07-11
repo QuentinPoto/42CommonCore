@@ -20,5 +20,5 @@ int	ft_isprint(int c)
 		return (ft_isalnum(c));
 	if (ft_isascii(c) && c > 32 && c < 127)
 		return (16);
-	return 0;
+	return (0);
 }

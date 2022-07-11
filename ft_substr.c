@@ -14,7 +14,7 @@
 
 // TODO recreer mon propre size_t ? long long int
 // TODO : si ca start apres, est-ce que je renvoie null ?
-char *ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t			res_len;
 	char			*res;
