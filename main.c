@@ -168,16 +168,19 @@ void	test_ft_memcmp(void)
 	char *str2 = ft_strdup("salut");
 	int 	n = 4;
 
-//	int ret = memcmp(str1, str2, n);
-	ft_memcmp(str1, str2, n);
-//	int ret2 = ft_memcmp(str1, str2, n);
-//	(void )ret2;
-//	printf("vrai fonction : %d\n", ret);
-//	printf("  ma fonction : %d\n", ret2);
+	int ret = memcmp(str1, str2, n);
+	int ret2 = ft_memcmp(str1, str2, n);
+
+	printf("vrai fonction : %d\n", ret);
+	printf("  ma fonction : %d\n", ret2);
 
 }
 
-
+void	test_ft_toupper(void)
+{
+	printf("%c\n", ft_toupper('z'+1));
+	printf("%c\n", ft_tolower('z'));
+}
 int	main(void)
 {
 //	test_ft_strtrim();
@@ -187,7 +190,11 @@ int	main(void)
 //	test_ft_realloc();
 //	test_ft_memcpy();
 //	test_ft_memccpy();
-	test_ft_memcmp();
+//	test_ft_memcmp();
+	test_ft_toupper();
+
+
+	return (0);
 }
 
 /*
@@ -213,18 +220,18 @@ memset
 ft_split
 memcpy
 memccpy
-//memcmp
+memcmp
+memchr
+toupper
+tolower
+ft_strmapi
 
 
-//memmove
-//memchr
-//toupper
-//tolower
-//ft_strmapi
 //strlcpy
 //strlcat
 //strchr
 //strrchr
 //strnstr
+//memmove -> comme memcpy, mais en plus chiand
  */
 

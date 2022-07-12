@@ -47,5 +47,8 @@ char	*ft_char_to_str(char c);
 void	*ft_memcpy(void *dest, const void * src, size_t n);
 void	*ft_memccpy(void *dest, const void *src, int c, size_t count);
 int		ft_memcmp(const void *str1, const void *str2, size_t n);
+void	*ft_memchr(const void *str, int c, size_t n);
+int		ft_toupper(int c);
+int		ft_tolower(int c);
 
 #endif
