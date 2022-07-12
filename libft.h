@@ -28,6 +28,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+void	ft_bzero(void *s, size_t n);
 int		ft_atoi(char *string);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
@@ -40,5 +41,11 @@ int		ft_is_in_charset(char c, const char *charset);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 int		ft_strlen_until(const char *string, const char *charset);
+void	ft_memset(void *s, int c, size_t n);
+void	*ft_realloc(void *ptr, size_t size);
+char	*ft_char_to_str(char c);
+void	*ft_memcpy(void *dest, const void * src, size_t n);
+void	*ft_memccpy(void *dest, const void *src, int c, size_t count);
+int		ft_memcmp(const void *str1, const void *str2, size_t n);
 
 #endif

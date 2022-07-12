@@ -24,7 +24,14 @@ SRCS =		ft_split.c \
             ft_putstr_fd.c \
             ft_strlen_until.c \
             ft_putendl_fd.c \
-            ft_putnbr_fd.c
+            ft_bzero.c \
+            ft_putnbr_fd.c \
+            ft_memset.c \
+            ft_realloc.c \
+            ft_char_to_str.c \
+            ft_memcpy.c \
+            ft_memccpy.c \
+            ft_memcmp.c
 
 OBJS =		${SRCS:.c=.o}
 NAME =     libft.a
@@ -35,8 +42,7 @@ NAME =     libft.a
 all: ${NAME}
 
 ${NAME}: ${OBJS}
-	ar -rc ${NAME} ${OBJS}
-#ar rcs ${NAME} ${OBJS}
+	ar -rcs ${NAME} ${OBJS}
 
 clean:
 	${RM} ${OBJS}
