@@ -16,21 +16,22 @@ char	*ft_strtrim(char const *s1, char const *set)
 {
 	unsigned int	start;
 	unsigned int	i;
-	unsigned int	len;
 	char			*res;
 
 	start = 0;
 	while (ft_is_in_charset(s1[start], set))
 		start++;
-	len = ft_strlen_until(&s1[start], set);
-	res = malloc(sizeof(char) * (len + 1));
+	if ((int)start == ft_strlen(s1))
+		return (ft_strdup(""));
+	res = malloc(sizeof(char) * (ft_strlen(&s1[start]) + 1));
 	if (res == NULL)
 		return (NULL);
 	i = 0;
-	while (!ft_is_in_charset(s1[start], set) && s1[start])
-	{
-		res[i] = s1[i];
-	}
+	while (s1[start])
+		res[i++] = s1[start++];
+	i--;
+	while (ft_is_in_charset(res[i], set) && i != 0)
+		res[i--] = 0;
 	return (res);
 }
 /*

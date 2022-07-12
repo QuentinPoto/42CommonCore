@@ -17,7 +17,7 @@ int	ft_strlen_until(const char *string, const char *charset)
 	int		len;
 
 	len = 0;
-	while (string[len] && ft_is_in_charset(string[len], charset))
+	while (string[len] && !ft_is_in_charset(string[len], charset))
 		len++;
 	return (len);
 }

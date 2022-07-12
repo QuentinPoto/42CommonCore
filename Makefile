@@ -22,7 +22,10 @@ SRCS =		ft_split.c \
             ft_putchar_fd.c \
             ft_putendl_fd.c \
             ft_putstr_fd.c \
-            ft_putendl_fd.c
+            ft_strlen_until.c \
+            ft_putendl_fd.c \
+            ft_putnbr_fd.c
+
 OBJS =		${SRCS:.c=.o}
 NAME =     libft.a
 
@@ -41,7 +44,10 @@ clean:
 fclean: clean
 	${RM} ${NAME}
 
-test: ${NAME}
+
+testc:
+	${RM} test
+test: ${NAME} testc
 	${CC} ${CFLAGS} main.c -L. -lft -o test
 
 
