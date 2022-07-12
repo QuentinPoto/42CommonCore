@@ -164,18 +164,16 @@ void	test_ft_memcpy(void)
 
 void	test_ft_memcmp(void)
 {
-	char str1[15];
-	char str2[15];
+	char *str1 = ft_strdup("salot");
+	char *str2 = ft_strdup("salut");
 	int 	n = 4;
-	memcpy(str1, "salot", 6);
-	memcpy(str2, "salut", 6);
 
-	int ret = memcmp(str1, str2, n);
-//	int ret2 = ft_strncmp(str1, str2, n);
-	int ret2 = ft_memcmp(str1, str2, n);
-
-	printf("vrai fonction : %d\n", ret);
-	printf("  ma fonction : %d\n", ret2);
+//	int ret = memcmp(str1, str2, n);
+	ft_memcmp(str1, str2, n);
+//	int ret2 = ft_memcmp(str1, str2, n);
+//	(void )ret2;
+//	printf("vrai fonction : %d\n", ret);
+//	printf("  ma fonction : %d\n", ret2);
 
 }
 
