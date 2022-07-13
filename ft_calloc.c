@@ -13,9 +13,10 @@
 #include "libft.h"
 
 void	*ft_calloc(size_t n, size_t s)
+// TODO : memset 0 partout ?
 // TODO : pas sur que le laisser en int marche partout...
 {
-	int		*res;
+	unsigned char		*res;
 
 	res = malloc(n * s);
 	if (res == NULL)

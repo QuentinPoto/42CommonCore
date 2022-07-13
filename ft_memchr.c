@@ -1,16 +1,17 @@
 #include "libft.h"
 
-/// c'est comme un str str... mais avec juste un character
 void	*ft_memchr(const void *str, int c, size_t n)
 {
 	size_t	i;
-	char 	*cstr;
+	unsigned char 	*cstr;
+	unsigned char 	cc;
 
-	cstr = (char *)str;
+	cstr = (unsigned char*)str;
+	cc = (unsigned char)c;
 	i = 0;
-	while (i < n && cstr[i])
+	while (i < n)
 	{
-		if (cstr[i] == c)
+		if (cstr[i] == cc)
 			return (&cstr[i]);
 		i++;
 	}
