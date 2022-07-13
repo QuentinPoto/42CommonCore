@@ -1,40 +1,46 @@
 CC =		gcc
 CFLAGS =	-Wall -Wextra -Werror
 RM =		 rm -f
-SRCS =		ft_split.c \
-            ft_calloc.c \
-            ft_itoa.c \
-            ft_strmapi.c \
-            ft_strtrim.c \
-            ft_substr.c \
-            ft_strjoin.c \
-            ft_strdup.c \
-            ft_atoi.c \
-            ft_isalnum.c \
-            ft_isalpha.c \
-            ft_isascii.c \
-            ft_isdigit.c \
-            ft_isprint.c \
-            is_in_charset.c \
-            ft_strlcpy.c \
-            ft_strlen.c \
-            ft_strncmp.c \
-            ft_putchar_fd.c \
-            ft_putendl_fd.c \
-            ft_putstr_fd.c \
-            ft_strlen_until.c \
-            ft_putendl_fd.c \
-            ft_bzero.c \
-            ft_putnbr_fd.c \
-            ft_memset.c \
-            ft_realloc.c \
-            ft_char_to_str.c \
-            ft_memcpy.c \
-            ft_memccpy.c \
-            ft_memcmp.c \
-            ft_memchr.c \
-            ft_toupper.c \
-            ft_tolower.c \
+SRCS =		is_in_charset_bonus.c \
+			ft_char_to_str_bonus.c \
+			ft_split.c \
+			ft_calloc.c \
+			ft_itoa.c \
+			ft_strmapi.c \
+ 			ft_strtrim.c \
+ 			ft_substr.c \
+ 			ft_strjoin.c \
+ 			ft_strdup.c \
+ 			ft_atoi.c \
+ 			ft_isalnum.c \
+ 			ft_isalpha.c \
+ 			ft_isascii.c \
+ 			ft_isdigit.c \
+ 			ft_isprint.c \
+ 			ft_strlcpy.c \
+ 			ft_strlen.c \
+ 			ft_strncmp.c \
+ 			ft_putchar_fd.c \
+ 			ft_putendl_fd.c \
+ 			ft_putstr_fd.c \
+ 			ft_strlen_until.c \
+ 			ft_putendl_fd.c \
+ 			ft_bzero.c \
+ 			ft_putnbr_fd.c \
+ 			ft_realloc.c \
+ 			ft_memcpy.c \
+ 			ft_memccpy.c \
+ 			ft_memcmp.c \
+ 			ft_memchr.c \
+ 			ft_memset.c \
+ 			ft_memmove.c \
+ 			ft_toupper.c \
+ 			ft_tolower.c \
+ 			ft_strlcat.c \
+ 			ft_strchr.c \
+ 			ft_strrchr.c \
+ 			ft_strnstr.c
+
 
 OBJS =		${SRCS:.c=.o}
 NAME =     libft.a
@@ -57,7 +63,8 @@ fclean: clean
 testc:
 	${RM} test
 test: ${NAME} testc
-	${CC} ${CFLAGS} main.c -L. -lft -o test
+	${CC} ${CFLAGS} main.c -L. -lft -o test && ./test
+
 
 
 #gcc -o yourprog yourprog.c -lstatic

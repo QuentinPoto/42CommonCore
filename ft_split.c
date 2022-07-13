@@ -17,13 +17,15 @@ static char	**ft_realloc_array_ptr(char **ptr, size_t new_size)
 	char	**res;
 	size_t	i;
 
-	res = malloc(sizeof (char *) * new_size);
+	res = malloc(sizeof(char*) * new_size);
 	i = 0;
 	while (i < new_size)
 	{
 		res[i] = ptr[i];
 		i++;
 	}
+	// TODO
+	free(ptr);
 	return (res);
 }
 

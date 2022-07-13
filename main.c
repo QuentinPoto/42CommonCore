@@ -192,13 +192,13 @@ int	main(void)
 //	test_ft_memccpy();
 //	test_ft_memcmp();
 	test_ft_toupper();
+	ft_strchr("saluta", 't');
 
 
 	return (0);
 }
 
 /*
-
 str_fd_tous...
 atoi
 isalpha
@@ -214,7 +214,6 @@ substr
 strjoin
 strtrim
 itoa
-
 bzero
 memset
 ft_split
@@ -225,13 +224,11 @@ memchr
 toupper
 tolower
 ft_strmapi
-
-
-//strlcpy
-//strlcat
-//strchr
-//strrchr
-//strnstr
-//memmove -> comme memcpy, mais en plus chiand
+memmove
+strlcpy
+strlcat
+strchr
+strrchr
+strnstr
  */
 

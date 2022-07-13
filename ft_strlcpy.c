@@ -14,8 +14,16 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	(void)dst;
-	(void)src;
-	(void)dstsize;
-	return 0;
+	size_t	i;
+
+	i = 0;
+	while(i < dstsize && src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = 0;
+
+	// TODO : pas sur de ca...
+	return (ft_strlen(src));
 }
