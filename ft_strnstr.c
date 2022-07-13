@@ -1,26 +1,23 @@
 #include "libft.h"
 
-static int  is_occurence(const char *s1, const char *s2, size_t n)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
 {
 	size_t	i;
+	size_t	c;
+	char	*h;
 
+	h = (char*)haystack;
+	if (ft_strlen(needle) == 0 || needle == haystack)
+		return(h);
 	i = 0;
-	while(i < n)
+	while(h[i] && i < n)
 	{
-		if (s1[i] != s2[i])
-			return (0);
+		c = 0;
+		while (h[i + c] && needle[c] && h[i + c] == needle[c] && i + c < n)
+			c++;
+		if ((int)c == ft_strlen(needle))
+			return(&h[i]);
 		i++;
-	}
-	return (1);
-}
-
-char *ft_strnstr(char *s1, char *s2, size_t n)
-{
-	while(*s1)
-	{
-		if (is_occurence(s1, s2, n))
-			return(s1);
-		s1++;
 	}
 	return(NULL);
 }

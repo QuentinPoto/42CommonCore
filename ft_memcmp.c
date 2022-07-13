@@ -7,5 +7,17 @@ int		ft_memcmp(const void *str1, const void *str2, size_t n)
 
 	str_a = (char *)str1;
 	str_b = (char *)str2;
-	return (ft_strncmp(str_a, str_b, n));
+
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (str_a[i] > str_b[i])
+			return (-1);
+		if (str_a[i] < str_b[i])
+			return (1);
+		i++;
+	}
+	return (0);
 }

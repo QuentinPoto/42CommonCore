@@ -11,20 +11,24 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "limits.h"
+
+#ifndef SIZE_MAX
+# ifdef __SIZE_MAX__
+#  define SIZE_MAX __SIZE_MAX__
+# endif
+#endif
 
 void	*ft_calloc(size_t n, size_t s)
-// TODO : memset 0 partout ?
-// TODO : pas sur que le laisser en int marche partout...
 {
 	unsigned char		*res;
 
+	// TODO : pas sur que ca compile avec la moulinette...
+	if (n == SIZE_MAX && s == SIZE_MAX)
+		return (NULL);
 	res = malloc(n * s);
 	if (res == NULL)
 		return (NULL);
-	while (n > 0)
-	{
-		res[n - 1] = 0;
-		n--;
-	}
+	ft_memset(res, 0, n);
 	return (res);
 }

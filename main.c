@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include "string.h"
+#include "limits.h"
 
 void	test_ft_strtrim(void)
 {
@@ -176,6 +177,15 @@ void	test_ft_memcmp(void)
 
 }
 
+void	test_ft_itoa(void)
+{
+	printf("\nresultats : \n\n");
+	printf("-%15s\n", ft_itoa(INT_MAX));
+	printf("-%15s\n", ft_itoa(INT_MIN));
+	printf("-%15s\n", ft_itoa(-1));
+	printf("-%15s\n", ft_itoa(1));
+	printf("-%15s\n", ft_itoa(0));
+}
 void	test_ft_toupper(void)
 {
 	printf("%c\n", ft_toupper('z'+1));
@@ -191,9 +201,8 @@ int	main(void)
 //	test_ft_memcpy();
 //	test_ft_memccpy();
 //	test_ft_memcmp();
-	test_ft_toupper();
-	ft_strchr("saluta", 't');
-
+	// test_ft_toupper();
+	test_ft_itoa();
 
 	return (0);
 }

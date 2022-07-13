@@ -14,5 +14,10 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	ft_putstr_fd(ft_itoa(n), fd);
+	char	*ascii;
+
+	ascii = ft_itoa(n);
+	ft_putstr_fd(ascii, fd);
+	free(ascii);
+	// TODO : g pas le droit de free...
 }

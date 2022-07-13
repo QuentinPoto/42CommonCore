@@ -15,6 +15,7 @@
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	unsigned int	start;
+	unsigned int	end;
 	unsigned int	i;
 	char			*res;
 
@@ -22,16 +23,22 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (ft_is_in_charset(s1[start], set))
 		start++;
 	if ((int)start == ft_strlen(s1))
-		return (ft_strdup(""));
-	res = malloc(sizeof(char) * (ft_strlen(&s1[start]) + 1));
+	{
+		res = ft_strdup("");
+		return (res);
+	}
+	end = ft_strlen(s1) - 1;
+	while (ft_is_in_charset(s1[end], set))
+		end--;
+	res = malloc(sizeof(char) * (end - start + 2));
 	if (res == NULL)
 		return (NULL);
 	i = 0;
-	while (s1[start])
+	while (start <= end)
 		res[i++] = s1[start++];
-	i--;
-	while (ft_is_in_charset(res[i], set) && i != 0)
-		res[i--] = 0;
+	res[i] = 0;
+
+
 	return (res);
 }
 /*

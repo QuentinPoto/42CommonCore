@@ -21,8 +21,7 @@ int	ft_atoi(const char *string)
 	result = 0;
 	i = 0;
 	minus = 1;
-	// TODO : check les isspace
-	while (ft_is_in_charset(string[i], " \t\n\r\b"))
+	while (ft_is_in_charset(string[i], " \t\n\r\v\f"))
 		i++;
 	if (string[i] == '-')
 	{
