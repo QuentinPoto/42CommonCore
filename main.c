@@ -196,13 +196,13 @@ int	main(void)
 //	test_ft_strtrim();
 //	test_ft_bzero();
 //	test_ft_memset();
-//	test_ft_split(1);
+	test_ft_split(1);
 //	test_ft_realloc();
 //	test_ft_memcpy();
 //	test_ft_memccpy();
 //	test_ft_memcmp();
 	// test_ft_toupper();
-	test_ft_itoa();
+//	test_ft_itoa();
 
 	return (0);
 }

@@ -3,6 +3,7 @@ CFLAGS =	-Wall -Wextra -Werror
 RM =		 rm -f
 SRCS =		is_in_charset_bonus.c \
 			ft_char_to_str_bonus.c \
+ 			ft_strlen_until_bonus.c \
 			ft_split.c \
 			ft_calloc.c \
 			ft_itoa.c \
@@ -23,11 +24,9 @@ SRCS =		is_in_charset_bonus.c \
  			ft_putchar_fd.c \
  			ft_putendl_fd.c \
  			ft_putstr_fd.c \
- 			ft_strlen_until.c \
  			ft_putendl_fd.c \
  			ft_bzero.c \
  			ft_putnbr_fd.c \
- 			ft_realloc.c \
  			ft_memcpy.c \
  			ft_memccpy.c \
  			ft_memcmp.c \

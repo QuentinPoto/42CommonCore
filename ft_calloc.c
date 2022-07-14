@@ -12,6 +12,9 @@
 
 #include "libft.h"
 #include "limits.h"
+// TODO : pas sur que ca compile avec la moulinette...
+//		le test du gars avec size max fait crash, comment gerer, en sachant
+//		que le size max change partout...
 
 #ifndef SIZE_MAX
 # ifdef __SIZE_MAX__
@@ -19,16 +22,15 @@
 # endif
 #endif
 
-void	*ft_calloc(size_t n, size_t s)
+void	*ft_calloc(size_t nmem, size_t size)
 {
 	unsigned char		*res;
 
-	// TODO : pas sur que ca compile avec la moulinette...
-	if (n == SIZE_MAX && s == SIZE_MAX)
+	if (nmem == SIZE_MAX && size == SIZE_MAX)
 		return (NULL);
-	res = malloc(n * s);
+	res = malloc(nmem * size);
 	if (res == NULL)
 		return (NULL);
-	ft_memset(res, 0, n);
+	ft_bzero(res, (nmem * size));
 	return (res);
 }

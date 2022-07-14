@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qjungo <qjungo@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/14 11:04:05 by qjungo            #+#    #+#             */
+/*   Updated: 2022/07/14 11:04:05 by qjungo           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	j;
 
 	i = ft_strlen(dst);
 	j = 0;
@@ -16,7 +28,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	}
 	dst[i + j] = '\0';
 	return (ft_strlen(src) + i);
-
 }
 
 /*

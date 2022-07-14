@@ -37,8 +37,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (start <= end)
 		res[i++] = s1[start++];
 	res[i] = 0;
-
-
 	return (res);
 }
 /*

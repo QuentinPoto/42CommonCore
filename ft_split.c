@@ -12,59 +12,55 @@
 
 #include "libft.h"
 
-static char	*ft_strjoin_free(char *s1, char *s2)
+static char	*ft_strjoin_free(char *s1, char s2)
 {
-	unsigned int	res_len;
-	unsigned int	i;
-	unsigned int	j;
 	char			*res;
+	char			*s2_c;
 
-	res_len = ft_strlen(s1) + ft_strlen(s2);
-	res = malloc(sizeof(char) * (res_len + 1));
-	i = 0;
-	while (s1[i])
-	{
-		res[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j])
-	{
-		res[i] = s2[j];
-		i++;
-		j++;
-	}
-	res[i] = 0;
+	s2_c = ft_char_to_str(s2);
+	res = ft_strjoin(s1, s2_c);
 	free(s1);
-	free(s2);
+	free(s2_c);
 	return (res);
 }
 
-static char	**ft_realloc_array_ptr(char **ptr, int word_count)
+static int	count_words(char const *s, char c)
 {
-	char	**res;
 	int		i;
+	int		new_word;
+	int		word_count;
 
-
-	res = malloc(sizeof(char*) * (word_count + 2));
 	i = 0;
-	while (i < word_count)
+	new_word = 1;
+	word_count = 0;
+	while (s[i])
 	{
-		res[i] = ptr[i];
+		if (s[i] == c)
+			new_word = 1;
+		else if (new_word && s[i] != c)
+		{
+			new_word = 0;
+			word_count++;
+		}
 		i++;
 	}
-	res[i] = NULL;
-	free(ptr);
-	return (res);
+	return (word_count);
 }
 
-static void	init_var(int *i, int *new_word, int *word_count, char ***res)
+static void	init_vars(int *i, int *new_word, int *word_count)
 {
 	*i = 0;
 	*new_word = 1;
 	*word_count = -1;
-	*res = malloc(sizeof(char*));
-	*res[0] = NULL;
+}
+
+static int	init_res(char const *s, char c, int *n_word, char ***res)
+{
+	*n_word = count_words(s, c);
+	*res = ft_calloc((*n_word) + 1, sizeof(char *));
+	if (*res == NULL)
+		return (1);
+	return (0);
 }
 
 char	**ft_split(char const *s, char c)
@@ -73,23 +69,24 @@ char	**ft_split(char const *s, char c)
 	int		i;
 	int		new_word;
 	int		word_count;
+	int		n_word;
 
-	init_var(&i, &new_word, &word_count, &res);
-	if(ft_strlen(s) == 0)
-		return (res);
+	init_vars(&i, &new_word, &word_count);
+	if (init_res(s, c, &n_word, &res))
+		return (NULL);
 	while (s[i])
 	{
 		if (s[i] == c)
 			new_word = 1;
 		else if (new_word && s[i] != c)
 		{
-			word_count++;
-			res = ft_realloc_array_ptr(res, word_count);
 			new_word = 0;
-			res[word_count] = ft_strjoin_free(ft_strdup(""), ft_char_to_str(s[i]));
+			res[++word_count] = ft_strjoin_free(ft_strdup(""), s[i]);
 		}
 		else
-			res[word_count] = ft_strjoin_free(res[word_count], ft_char_to_str(s[i]));
+			res[word_count] = ft_strjoin_free(res[word_count], s[i]);
+		if (word_count > n_word && res[word_count] == NULL)
+			return (NULL);
 		i++;
 	}
 	return (res);
