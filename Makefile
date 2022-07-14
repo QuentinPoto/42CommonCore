@@ -40,9 +40,18 @@ SRCS =		is_in_charset_bonus.c \
  			ft_strrchr.c \
  			ft_strnstr.c
 
+SRCS_BONUS =	ft_lstnew.c \
+				ft_lstadd_front.c \
+				ft_lstsize.c \
+				ft_lstlast.c \
+				ft_lstadd_back.c \
+				ft_lstdelone.c \
+				ft_lstclear.c
 
-OBJS =		${SRCS:.c=.o}
-NAME =     libft.a
+
+OBJS =			${SRCS:.c=.o}
+OBJS_BONUS =	${SRCS_BONUS:.c=.o}
+NAME =     		libft.a
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
@@ -51,6 +60,9 @@ all: ${NAME}
 
 ${NAME}: ${OBJS}
 	ar -rcs ${NAME} ${OBJS}
+
+bonus: ${OBJS} ${OBJS_BONUS}
+	ar -rcs ${NAME} ${OBJS} ${OBJS_BONUS}
 
 clean:
 	${RM} ${OBJS}
