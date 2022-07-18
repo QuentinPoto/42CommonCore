@@ -1,5 +1,5 @@
 #include "utils.h"
-#include "../libft.h"
+#include "../libft/libft.h"
 #include "../ft_printf.h"
 
 char	*formated(va_list args, t_format_type format_type, int *null_count)
@@ -25,9 +25,10 @@ char	*formated(va_list args, t_format_type format_type, int *null_count)
 
 char	*get_format(char *string, va_list args, int *null_count)
 {
-	int				i;
-	t_format_type	format_type;
+	int			i;
+	t_format_type		format_type;
 	char			*end_word;
+	char			*formated_word;
 
 	i = 0;
 	while (string[i] && !ft_is_in_charset(string[i], "csuipdxXfegn"))
@@ -38,5 +39,6 @@ char	*get_format(char *string, va_list args, int *null_count)
 	end_word = ft_strdup((char*)&string[i + 1]);
 	free(string);
 	string = NULL;
-	return (ft_strjoin_free(formated(args, format_type, null_count), end_word));
+	formated_word = formated(args, format_type, null_count);
+	return (ft_strjoin_free(&formated_word, &end_word));
 }

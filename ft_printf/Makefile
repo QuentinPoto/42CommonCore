@@ -2,13 +2,14 @@ CC =		gcc
 CFLAGS =	-Wall -Wextra -Werror
 RM =		rm -f
 SRCS =		ft_printf.c \
-			utils/add_modulo.c \
-			utils/ft_strjoin_free.c \
-			utils/get_format.c \
-			utils/format_list.c
+		utils/add_modulo.c \
+		utils/ft_strjoin_free.c \
+		utils/get_format.c \
+		utils/format_list.c 
+		
 
 OBJS =		${SRCS:.c=.o}
-NAME =     libftprintf.a
+NAME =		libftprintf.a
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
@@ -33,6 +34,11 @@ VALGRIND = valgrind -q --leak-check=full --track-origins=yes
 
 testc:
 	${RM} test
+	${RM} print_out
 
-test: testc
-	gcc main.c -L. -lftprintf -lft -o test
+test:	re testc
+	gcc tester/main.c -L. -lftprintf -L./libft -lft -o test 
+	${VALGRIND} ./test
+
+
+#gcc tester/print_out.c -L. -lftprintf -L./libft -lft -o print_out

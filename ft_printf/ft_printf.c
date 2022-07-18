@@ -5,7 +5,7 @@
 #include "ft_printf.h"
 #include "stdarg.h"
 #include "utils/utils.h"
-#include "libft.h"
+#include "libft/libft.h"
 
 // TODO : mettre en bonus // free_split
 void	free_words(char **words)
@@ -15,11 +15,12 @@ void	free_words(char **words)
 	i = 0;
 	while (words[i])
 	{
-		if (words[i])
-			free(words[i]);
+		free(words[i]);
+		words[i] = NULL;	
 		i++;
 	}
-	free(words);
+	//free(words);
+	//words = NULL;
 }
 
 int	ft_printf(const char *string, ...)
@@ -27,10 +28,11 @@ int	ft_printf(const char *string, ...)
 	va_list		args;
 	int 		i;
 	char 		*to_print;
-	int			*formats;
+	int		*formats;
 	char		**words;
-	int			null_count;
-	int			res;
+	int		null_count;
+	int		res;
+	char		*to_add;
 
 	null_count = 0;
 	va_start(args, string);
@@ -42,13 +44,19 @@ int	ft_printf(const char *string, ...)
 	{
 		/// ajoute les modulo
 		if (formats[i] && formats[i] > 1)
-			to_print = ft_strjoin_free(to_print, add_modulo(formats[i]));
+		{
+			to_add = add_modulo(formats[i]); 
+			to_print = ft_strjoin_free(&to_print, &to_add);
+		}
 		/// ajoute les formatages
 		if (formats[i] && formats[i] % 2 != 0)
-			to_print = ft_strjoin_free(to_print, get_format(words[i], args, &null_count));
-//		/// ajoute les mots sans %format (genre le 1er, ou ceux juste avec 2 %%)
-//		if (!formats[i] || !(formats[i] % 2))
-//			to_print = ft_strjoin_free(to_print, words[i]);
+		{
+			to_add = get_format(words[i], args, &null_count);
+			to_print = ft_strjoin_free(&to_print, &to_add);
+		}
+		/// ajoute les mots sans %format (genre le 1er, ou ceux juste avec 2 %%)
+		if (!formats[i] || !(formats[i] % 2))
+			to_print = ft_strjoin_free(&to_print, &words[i]);
 		i++;
 	}
 	ft_putstr_fd(to_print, 1);

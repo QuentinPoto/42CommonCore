@@ -1,4 +1,4 @@
-#include "../libft.h"
+#include "../libft/libft.h"
 
 // TODO : a cut quand dans libft
 static int	ft_count_words(char const *s, char c)

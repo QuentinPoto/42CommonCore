@@ -7,7 +7,7 @@
 # include "stdarg.h"
 
 int		*format_list(char *string);
-char	*ft_strjoin_free(char *s1, char *s2);
+char	*ft_strjoin_free(char **s1, char **s2);
 char	*add_modulo(int n);
 char	*get_format(char *string, va_list args, int *null_count);
 
