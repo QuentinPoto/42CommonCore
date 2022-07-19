@@ -2,13 +2,13 @@
 #include "stdio.h"
 #include "../libft/libft.h"
 
-#ifndef P
-# define P "ERREUR, pas de define...  %d \n", 5
-#endif
-
-
 int	main(void)
-{	
-	ft_printf(P);
+{
+	/// cette var sert a tester les fonctions de pointer
+	int	var;
+	int	val;
+
+	var = 1;	
+	ft_printf(FORMAT, ARGS);
 }
 

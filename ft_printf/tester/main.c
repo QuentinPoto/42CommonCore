@@ -3,9 +3,140 @@
 #include "stdio.h"
 #include "unistd.h"
 
-void	printf_test(void)
+// TODO : dans libft 
+enum e_font {
+	RED,
+	GREEN,
+	WHITE,
+	BLUE,
+	YELLOW,
+	PURPLE,
+	STD,
+	BOLD,
+};
+void	ft_color(int color, int font)
 {
-	printf("\n\nprintf tests :\n\n");
+	if (color == WHITE)
+		printf("\033[0m");
+	if (color == RED)
+       		printf("\033[0;31m");
+	if (color == GREEN)
+		printf("\033[0;32m");
+	if (color == YELLOW) 
+		printf("\033[0;33m");
+	if (color == BLUE) 
+		printf("\033[0;34m");
+	if (color == PURPLE) 
+		printf("\033[0;35m");
+
+
+	if (font == STD)	
+		printf("\e[m");
+	if (font == BOLD)	
+       		printf("\e[1m");
+}
+
+#define TEST(format, args...) \
+			ft_bzero(buffer, 100); \
+			if (mode == 0) \
+				system("gcc tester/print_out.c -L. -lftprintf -L./libft -lft -o print_out -DFORMAT='"#format"' -DARGS='"#args"'  "); \
+			else \
+				system("gcc tester/print_out.c -L. -lftprintf -L./libft -lft -o print_out -DFORMAT='"#format"' -DARGS=\""#args"\"  "); \
+			system("./print_out > file"); \
+			fp = fopen("file", "r"); \
+			fread(buffer, 1000, 1, fp); \
+			fclose(fp);\
+			\
+			sprintf_res = malloc(ft_strlen(format) + 10); \
+			cres = sprintf(sprintf_res, format, args); \
+			mcres = ft_printf(format, args);\
+			printf("\r");\
+			if (cres == mcres) {\
+			       	ft_color(GREEN, BOLD); \
+				printf("%4d.OK ", pos);\
+		       	} \
+			else { \
+				ft_color(RED, BOLD); \
+				printf("%4d.KO ! expected : %d\t got : %d\n", pos, cres, mcres);  \
+			} \
+			if (!ft_strncmp(buffer, sprintf_res, cres)) {\
+			       	ft_color(GREEN, BOLD); \
+				printf("%4d.OK : '%s' '%s' (%s)\n", pos, sprintf_res, buffer, ""#format", "#args"" ); \
+			} \
+			else { \
+				ft_color(RED, BOLD); \
+				printf("%4d.KO ! expected : '%s'\t got : '%s', (%s)\n", pos, sprintf_res, buffer, ""#format", "#args""); \
+			} \
+			\
+			pos++; free(sprintf_res); system("rm -f file");
+			
+						
+void	test_p(void)
+{
+	char	buffer[100];
+	FILE	*fp;
+	char	*sprintf_res;
+	int	cres;
+	int	mcres;
+	int	pos;
+	int	mode;
+
+	ft_color(WHITE, BOLD); printf("\n   %-7s %-7s\n", "RETURN", "PRINT");	
+
+
+	/// %c	
+	pos = 1; mode = 1; ft_color(BLUE, BOLD); printf("\nCHAR (%%c)\n");
+	TEST("salut ", '0');
+	TEST("%c", '0');	
+	TEST("  %c  ", '0');	
+	TEST("%%%%%c  ", '0' - 256);	
+	TEST("  %c  %%", '0' + 256);	
+	TEST(" %c %c %c ", ' ', ' ', ' ');	
+	TEST(" %c %c    %c", '1', '2', '3');	
+	TEST("%c %c %c", 0, 0, 0); // TODO imprimme les espace (devrait tout compter et s'arreter au 1er 0 ??
+	TEST("", ' ');
+
+	/// %d
+	pos = 1; mode = 2; ft_color(BLUE, BOLD); printf("\nINT (%%d) (%%i)\n");
+	TEST("%%%d", 0);
+	TEST("%d", 2093422345235243334);
+	TEST("  %d   i   a   ", 404);
+	TEST("%d     %d",560, 55);
+	TEST("       %d", 1);
+	TEST("%d", 0xF);
+	TEST("%d uuuu uuuu ", 4834275098347592);
+	TEST(" %d", 12);
+	TEST(" %i", 12);
+	TEST(" %i %%%%   , %d", 5464, 45);
+	TEST(" %%%i     ", 16202);
+
+	/// %s
+	pos = 1; mode = 0; ft_color(BLUE, BOLD); printf("\nSTRING (%%s)\n");
+	TEST("%s", "hi mom");
+	TEST("%s     ", "hi mom");
+	TEST("      %s", "hi mom");
+	TEST("  %s   ", "hi mom");
+	TEST("%s", "");
+	TEST("%s ", "");
+	TEST(" %s", "");
+	TEST("   %s   ", "");
+
+	/// %x %X
+	pos = 1; mode = 5; ft_color(BLUE, BOLD); printf("\nHEXA (%%x) (%%X)\n");
+	TEST("%X", 0xF);
+
+	/// %p
+	pos = 1; mode = 4; ft_color(BLUE, BOLD); printf("\nPOINTER (%%p)\n"); int val; int var;
+	TEST("%p", &val);
+	TEST("%p", NULL);
+
+	/// %u
+	pos = 1; mode = 6; ft_color(BLUE, BOLD); printf("\nUNSIGNED INT (%%u)\n");
+	TEST("%u", 12);
+	TEST("%u", -12);
+
+
+	return ;	
 	printf("'%10s'\n", "test");
 	printf("'%*s'\n", -10, "test");
 	printf("'%10.3s'\n", "12345");
@@ -16,8 +147,6 @@ void	printf_test(void)
 	printf("'%10d'\n", 4);
 	int printed = printf("'% .5f'\n", 4.1234);
 	printf("'%d' printed !\n", printed);
-
-
 	printf("\nje ne sais pas ce que le h change... : \n");
 	char v = 'a';
 	printf("char : '%hhi' printed !\n", v);
@@ -25,7 +154,6 @@ void	printf_test(void)
 	short int c = 5;
 	printf("char : '%i' printed !\n", c);
 	printf("char : '%hi' printed !\n", c);
-
 	int new = 0;
 	printf("ptr '%n'\n", &new);
 	printf("le vrai : %d\n", new);
@@ -33,82 +161,9 @@ void	printf_test(void)
 	printf("The value of %ns : ", &s);
 	printf("%d", s);
 }
-//Lenovo ThinkPad X270 12" Core i5 2,4 GHz - SSD 128 Go - 4 Go AZERTY - Français
-void	red(void)
-{
-	printf("\033[0;31m");
-	printf("\e[1m");
-}
-
-void	green(void)
-{
-	printf("\033[0;32m");
-	printf("\e[1m");
-}
-
-void	r_col(void)
-{
-	printf("\033[0m");
-	printf("\e[m");
-}
-
-
-
-void	c_test(void)
-{
-	red();
-	printf("bool : %d\n", ft_printf("salut ", '0') == printf("salut ", '0') );
-	printf("bool : %d\n", ft_printf("%c\n", '0') == printf("%c\n", '0') );
-	printf("bool : %d\n", ft_printf(" %c \n", '0') == printf(" %c \n", '0') );
-	printf("bool : %d\n", ft_printf(" %c\n", '0' - 256) == printf(" %c\n", '0' - 256));
-	printf("bool : %d\n", ft_printf("%c \n", '0' + 256) == printf("%c \n", '0' + 256));
-	printf("bool : %d\n", ft_printf(" %c %c %c \n", ' ', ' ', ' ') == printf(" %c %c %c \n", ' ', ' ', ' '));
-	printf("bool : %d\n", ft_printf(" %c %c %c \n", '1', '2', '3') == printf(" %c %c %c \n", '1', '2', '3'));
-	
-	green();
-	printf("bool : %d\n", ft_printf("' %c %c %c '\n", 0, '1', '2') == printf("' %c %c %c '\n", 0, '1', '2'));
-	printf("bool : %d\n", ft_printf(" %c %c %c \n", '0', 0, '1') == printf(" %c %c %c \n", '0', 0, '1'));
-	r_col();
-	printf("bool : %d\n", ft_printf("' %c %c %c '\n", '2', '1', 0) == printf("' %c %c %c '\n", '2', '1', 0));
-}
-int	pos = 1;
-#define TEST(format, args...) \
-			system("gcc tester/print_out.c -L. -lftprintf -L./libft -lft -o print_out -D P='"#format","#args"'"); \
-			system("./print_out > file"); \
-			fp = fopen("file", "r"); \
-			fread(buffer, 1000, 1, fp); \
-			\
-			sprintf_res = malloc(ft_strlen(format) + 1); \
-			cres = sprintf(sprintf_res, format, args); \
-			mcres = ft_printf(format, args);\
-			\
-			if (cres == mcres) { green(); printf("%d.OK return ", pos); } \
-			else { red(); printf("%d.KO return ! expected : %d\t got : %d\n", pos, cres, mcres);  } \
-			if (!ft_strncmp(buffer, sprintf_res, cres)) { green(); printf("%d.OK print ", pos); } \
-			else { red(); printf("%d.KO print ! expected : %s\t got : %s\n", pos, sprintf_res, buffer); }\
-			\
-			pos++; r_col();\
-			free(sprintf_res);
-			
-			//ft_putstr_fd(buffer, 1); \
-			//ft_putendl_fd(sprintf_res, 1); \
-						
-void	test_p(void)
-{
-	char	buffer[100] = "";
-	FILE	*fp;
-	char	*sprintf_res;
-	int	cres;
-	int	mcres;
-	
-	TEST("salut les poto %d %d", 5, 5);
-}
 
 int main() 
 {
-//	ft_printf("salut '%0.d' new '%%%%', '%c', '%%%d' '%s'\n", 4000, 'A', 5, "print string");
-//	printf_test();
-//	c_test();
 	test_p();
 }
 
