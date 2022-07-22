@@ -18,10 +18,27 @@
 # define INT_MIN -2147483648
 
 typedef struct s_list {
-	void			*content;
+	void		*content;
 	struct s_list	*next;
 }	t_list;
+enum e_color {
+	BLUE,
+	RED,
+	YELLOW,
+	PURPLE,
+	GREEN,
+	CYAN,
+	WHITE,
+	RESET,
 
+	BOLD,
+	STD,
+};
+
+void	ft_strrev(char *string);
+char	*ft_itoa_base(unsigned long long int n, char *base, unsigned int n_base);
+void	ft_color(int color, int font);
+char	*ft_utoa(unsigned int n);
 char	**ft_split(char const *s, char c);
 void	*ft_calloc(size_t nmem, size_t size);
 char	*ft_itoa(int n);

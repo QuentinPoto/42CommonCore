@@ -39,6 +39,8 @@ testc:
 test:	re testc
 	gcc tester/main.c -L. -lftprintf -L./libft -lft -o test 
 	${VALGRIND} ./test
-
-
+ulibft:	
+	cd ../libft/ && make re
+	cp ../libft/libft.h ./libft/libft.h
+	cp ../libft/libft.a ./libft/libft.a
 #gcc tester/print_out.c -L. -lftprintf -L./libft -lft -o print_out

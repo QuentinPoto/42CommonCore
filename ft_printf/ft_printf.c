@@ -6,7 +6,6 @@
 int	ft_printf(const char *string, ...)
 {
 	va_list		args;
-	int 		i;
 	char 		*to_print;
 	int		*formats;
 	char		**words;
@@ -18,31 +17,31 @@ int	ft_printf(const char *string, ...)
 	va_start(args, string);
 	formats = format_list((char *)string);
 	words = ft_split((char *)string, '%');
-	i = 0;
+	format_type.i = 0;
 	to_print = ft_strdup("");
-	while (words[i])
+	while (words[format_type.i])
 	{
 		/// ajoute les modulo
-		if (formats[i] && formats[i] > 1)
+		if (formats[format_type.i] && formats[format_type.i] > 1)
 		{
-			to_add = add_modulo(formats[i]); 
+			to_add = add_modulo(formats[format_type.i]); 
 			to_print = ft_strjoin_free(&to_print, &to_add);
 		}
 		/// ajoute les formatages
-		if (formats[i] && formats[i] % 2 != 0)
+		if (formats[format_type.i] && formats[format_type.i] % 2 != 0)
 		{
-			to_add = get_format(words[i], args, &format_type);
+			to_add = get_format(words[format_type.i], args, &format_type);
 			to_print = ft_strjoin_free(&to_print, &to_add);
 			free(format_type.flag);
 		}
 		/// ajoute les mots sans %format (genre le 1er, ou ceux juste avec 2 %%)
-		if (!formats[i] || !(formats[i] % 2))
-			to_print = ft_strjoin_free(&to_print, &words[i]);
-		i++;
+		if (!formats[format_type.i] || !(formats[format_type.i] % 2))
+			to_print = ft_strjoin_free(&to_print, &words[format_type.i]);
+		format_type.i++;
 	}
-	if (formats[i] && formats[i] > 1)
+	if (formats[format_type.i] && formats[format_type.i] > 1)
 	{
-		to_add = add_modulo(formats[i]); 
+		to_add = add_modulo(formats[format_type.i]); 
 		to_print = ft_strjoin_free(&to_print, &to_add);
 	}
 

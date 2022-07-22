@@ -3,39 +3,6 @@
 #include "stdio.h"
 #include "unistd.h"
 
-// TODO : dans libft 
-enum e_font {
-	RED,
-	GREEN,
-	WHITE,
-	BLUE,
-	YELLOW,
-	PURPLE,
-	STD,
-	BOLD,
-};
-void	ft_color(int color, int font)
-{
-	if (color == WHITE)
-		printf("\033[0m");
-	if (color == RED)
-       		printf("\033[0;31m");
-	if (color == GREEN)
-		printf("\033[0;32m");
-	if (color == YELLOW) 
-		printf("\033[0;33m");
-	if (color == BLUE) 
-		printf("\033[0;34m");
-	if (color == PURPLE) 
-		printf("\033[0;35m");
-
-
-	if (font == STD)	
-		printf("\e[m");
-	if (font == BOLD)	
-       		printf("\e[1m");
-}
-
 #define TEST(format, args...) \
 			ft_bzero(buffer, 100); \
 			if (mode == 0) \
@@ -45,11 +12,12 @@ void	ft_color(int color, int font)
 			system("./print_out > file"); \
 			fp = fopen("file", "r"); \
 			fread(buffer, 1000, 1, fp); \
-			fclose(fp);\
+			fclose(fp); \
 			\
-			sprintf_res = malloc(ft_strlen(format) + 10); \
+			sprintf_res = malloc(100); \
+			ft_bzero(sprintf_res, 100); \
 			cres = sprintf(sprintf_res, format, args); \
-			mcres = ft_printf(format, args);\
+			mcres = ft_printf(format, args); \
 			printf("\r");\
 			if (cres == mcres) {\
 			       	ft_color(GREEN, BOLD); \
@@ -80,10 +48,12 @@ void	test_p(void)
 	int	mcres;
 	int	pos;
 	int	mode;
+	int	val;
+	int	var;
 
 	ft_color(WHITE, BOLD); printf("\n   %-7s %-7s\n", "RETURN", "PRINT");	
 
-
+/*
 	/// %c	
 	pos = 1; mode = 1; ft_color(BLUE, BOLD); printf("\nCHAR (%%c)\n");
 	TEST("salut ", '0');
@@ -120,21 +90,54 @@ void	test_p(void)
 	TEST("%s ", "");
 	TEST(" %s", "");
 	TEST("   %s   ", "");
-
 	/// %x %X
 	pos = 1; mode = 5; ft_color(BLUE, BOLD); printf("\nHEXA (%%x) (%%X)\n");
-	TEST("%X", 0xF);
+	TEST("%x", 0xF);
+	TEST("%X", 566456);
+	TEST("%x", -787899);
+	TEST("  %X   salut", 444);
+	TEST("%X, %x, %X", 4541684886, 5, 7777);
+
 
 	/// %p
-	pos = 1; mode = 4; ft_color(BLUE, BOLD); printf("\nPOINTER (%%p)\n"); int val; int var;
-	TEST("%p", &val);
-	TEST("%p", NULL);
+	pos = 1; mode = 4; ft_color(BLUE, BOLD); printf("\nPOINTER (%%p)\n");
+	TEST("%x %p %li",&val, &val, &val);
+	//TEST("%u %u", 2048256048, 2048256048L * 2);
+	//TEST("%u %i ", &val, &val);
+	//TEST("%p", NULL);
 
+*/
 	/// %u
 	pos = 1; mode = 6; ft_color(BLUE, BOLD); printf("\nUNSIGNED INT (%%u)\n");
 	TEST("%u", 12);
 	TEST("%u", -12);
+	TEST("%%%u", 0);
+	TEST("%u", 2093422345235243334);
+	TEST("  %u   i   a   ", 404);
+	TEST("%u     %u",560, 55);
+	TEST("       %u", 1);
+	TEST("%u", 0xF);
+	TEST("%u uuuu uuuu ", 4834275098347592);
+	TEST(" %u", 12);
+	TEST(" %u", 12);
+	TEST(" %u %%%%   , %u", 5464, 45);
+	TEST(" %%%u     ", 16202);
 
+	/// %ld
+	pos = 1; mode = 7; ft_color(BLUE, BOLD); printf("\nLONG INT (%%ld)\n");
+	TEST("%ld", 12);
+	TEST("%ld", -12);
+	TEST("%%%ld", 0);
+	TEST("%ld", 2093422345235243334);
+	TEST("  %ld   i   a   ", 404);
+	TEST("%ld     %ld",560, 55);
+	TEST("       %ld", 1);
+	TEST("%ld", 0xF);
+	TEST("%ld uuuu uuuu ", 4834275098347592);
+	TEST(" %ld", 12);
+	TEST(" %ld", 12);
+	TEST(" %ld %%%%   , %ld", 5464, 45);
+	TEST(" %%%ld     ", 16202);
 
 	return ;	
 	printf("'%10s'\n", "test");

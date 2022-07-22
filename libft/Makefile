@@ -38,7 +38,11 @@ SRCS =		is_in_charset_bonus.c \
  			ft_strlcat.c \
  			ft_strchr.c \
  			ft_strrchr.c \
- 			ft_strnstr.c
+ 			ft_strnstr.c \
+			ft_color_bonus.c \
+			ft_utoa_bonus.c \
+			ft_itoa_base_bonus.c \
+			ft_strrev_bonus.c
 
 SRCS_BONUS =	ft_lstnew.c \
 				ft_lstadd_front.c \
@@ -72,16 +76,15 @@ clean:
 fclean: clean
 	${RM} ${NAME}
 
+re: fclean all
+
+.PHONY: all clean fclean re
+
+
+
 
 testc:
 	${RM} test
 test: ${NAME} testc
-	${CC} ${CFLAGS} main.c -L. -lft -o test && ./test
-
-
-
-#gcc -o yourprog yourprog.c -lstatic
-
-re: fclean all
-
-.PHONY: all clean fclean re
+	${CC} ${CFLAGS} main.c -L. -lft -o test
+	./test

@@ -96,23 +96,6 @@ void	test_ft_split(int loop)
 	}
 }
 
-void	test_ft_realloc(void)
-{
-	char *string = ft_strdup("hello");
-
-	printf("original : %s\n", string);
-
-
-	string = ft_realloc(string, ft_strlen(string) + 10);
-	printf("apres realloc : %s\n", string);
-
-	string[7] = 'f';
-	string[8] = 0;
-
-	printf("apres modif : %s\n", string);
-
-}
-
 void	test_ft_memccpy(void)
 {
 	const char src[50] = "ce que nous voulons copier !";
@@ -191,12 +174,46 @@ void	test_ft_toupper(void)
 	printf("%c\n", ft_toupper('z'+1));
 	printf("%c\n", ft_tolower('z'));
 }
+
+void	test_ft_utoa(void)
+{
+	unsigned int	res1=INT_MAX;
+	unsigned int	res2=INT_MIN;
+	unsigned int	res3=-555451;
+	unsigned int	res4=55;
+	unsigned int	res5=0;
+
+	printf("real : %u, mine : %s\n", res1, ft_utoa(res1));
+	printf("real : %u, mine : %s\n", res2, ft_utoa(res2));
+	printf("real : %u, mine : %s\n", res3, ft_utoa(res3));
+	printf("real : %u, mine : %s\n", res4, ft_utoa(res4));
+	printf("real : %u, mine : %s\n", res5, ft_utoa(res5));
+}
+
+void	test_ft_itoa_base(void)
+{
+	int	res1=INT_MAX;
+	int	res2=INT_MIN;
+	int	res3=-555451;
+	int	res4=55;
+	int	res5=0;
+
+	printf("real : %X, mine : %s\n", res1, ft_itoa_base(res1, "0123456789ABCDEF", 16));
+	printf("real : %X, mine : %s\n", res2, ft_itoa_base(res2, "0123456789ABCDEF", 16));
+	printf("real : %X, mine : %s\n", res3, ft_itoa_base(res3, "0123456789ABCDEF", 16));
+	printf("real : %X, mine : %s\n", res4, ft_itoa_base(res4, "0123456789ABCDEF", 16));
+	printf("real : %X, mine : %s\n", res5, ft_itoa_base(res5, "0123456789ABCDEF", 16));
+
+}
+
 int	main(void)
 {
+	test_ft_itoa_base();
+	//test_ft_utoa();
 //	test_ft_strtrim();
 //	test_ft_bzero();
 //	test_ft_memset();
-	test_ft_split(1);
+	//test_ft_split(1);
 //	test_ft_realloc();
 //	test_ft_memcpy();
 //	test_ft_memccpy();
@@ -206,26 +223,4 @@ int	main(void)
 
 	return (0);
 }
-
-/*
-KO
-
-
-substr
-strjoin 
-strtrim 
-split 
-itoa 
-strmapi 
-strlcat 
-strnstr
-atoi 
-memcmp 
-strchr 
-strrchr 
-strncmp 
-strlcpy 
-calloc 
-striteri
- */
 
