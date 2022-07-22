@@ -8,7 +8,7 @@
 # include "../ft_printf.h"
 
 int	*format_list(char *string);
-char	*ft_strjoin_free(char **s1, char **s2);
+char	*ft_strjoin_free(char **s1, char **s2, int *ccount);
 char	*add_modulo(int n);
 char	*get_format(char *string, va_list args, t_format_type *format_type);
 

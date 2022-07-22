@@ -7,6 +7,8 @@ typedef struct s_format_type {
 	char	*flag;
 	int	null_count;
 	int	i;
+	int	first_null;
+	int	ccount;
 }	t_format_type;
 
 int	ft_printf(const char *string, ...);

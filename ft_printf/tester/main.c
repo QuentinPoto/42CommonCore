@@ -53,18 +53,44 @@ void	test_p(void)
 
 	ft_color(WHITE, BOLD); printf("\n   %-7s %-7s\n", "RETURN", "PRINT");	
 
-/*
-	/// %c	
+	/// %c
 	pos = 1; mode = 1; ft_color(BLUE, BOLD); printf("\nCHAR (%%c)\n");
+	/*
+	TEST("%c %c %c", 0, 0, 0); 
+	TEST("  %c  %%", 0 + 256);	
+	TEST("    salut !%c  %%", 0 );	
+	TEST(" k %c", 0 );	
+	TEST("  %c  %%", '0' + 256);	
 	TEST("salut ", '0');
 	TEST("%c", '0');	
 	TEST("  %c  ", '0');	
 	TEST("%%%%%c  ", '0' - 256);	
-	TEST("  %c  %%", '0' + 256);	
 	TEST(" %c %c %c ", ' ', ' ', ' ');	
 	TEST(" %c %c    %c", '1', '2', '3');	
-	TEST("%c %c %c", 0, 0, 0); // TODO imprimme les espace (devrait tout compter et s'arreter au 1er 0 ??
 	TEST("", ' ');
+	*/
+	ft_color(BLUE, BOLD); printf("\nflags (%%15)\n");
+	//c
+	TEST("%10c ", 'u');
+	TEST("%-10c ", 'u');
+	TEST("%10c ", 0);
+	return;
+	TEST("    salut !%-5c  %%", 0);	
+	TEST("salut %5c", '0');
+	TEST("%c", '0');	
+	TEST("  %*10c  ", '0');	
+	TEST("%0c  ", '0' - 256);	
+	TEST(" %8c %1c %-8c ", ' ', ' ', ' ');	
+	TEST(" %c %c    %c", '1', '2', '3');	
+	TEST("", ' ');
+	//d
+	TEST("%%%-5d", 0);
+	TEST("%8d", 2093422345235243334);
+	TEST("  %0d   i   a   ", 404);
+	TEST("%7d     %0d",560, 55);
+	TEST("       %4d", 1);
+	TEST("%0d", 0xF);
+	return;
 
 	/// %d
 	pos = 1; mode = 2; ft_color(BLUE, BOLD); printf("\nINT (%%d) (%%i)\n");
@@ -106,7 +132,6 @@ void	test_p(void)
 	//TEST("%u %i ", &val, &val);
 	//TEST("%p", NULL);
 
-*/
 	/// %u
 	pos = 1; mode = 6; ft_color(BLUE, BOLD); printf("\nUNSIGNED INT (%%u)\n");
 	TEST("%u", 12);

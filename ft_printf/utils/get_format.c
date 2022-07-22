@@ -2,6 +2,8 @@
 #include "../libft/libft.h"
 #include "../ft_printf.h"
 
+/*
+
 static int	init_mal(char **res, unsigned int n, unsigned int *i)
 {
 	int		count;
@@ -62,14 +64,40 @@ char	*ft_spe_itoa(void *n, int type)
 	res[i] = 0;
 	return (res);
 }
+*/
+static char	*add_space(t_format_type *format_type, char **string)
+{
+	char	*res;
+	int	c;
+	int	i;
+
+	i = 0;
+	while (format_type->flag[i] && !ft_is_in_charset(format_type->flag[i], "-+0123456789"))
+		i++;
+	c = ft_atoi(&format_type->flag[i]);
+	if (c == 0)
+		return (NULL);
+	c -= ft_strlen(*string);
+	
+	
+	if (c < 0)
+		c = -c;	
+	res = malloc(c + 1);
+	ft_memset(res, ' ', c);
+	res[c] = '\0';
+	return (res);
+}
 
 static char	*character(unsigned int val, t_format_type *format_type)
 {
-	if (!val) 
+	char	*res;
+
+
+	if ((char)val == '\0') 
 	{
 		format_type->null_count++;
-		// TODO : comment lui dire que si c'est au debut il devrait cut le reste de la string !!
-		// 
+		if (format_type->first_null == -1)
+			format_type->first_null = format_type->ccount;
 	}
 	return (ft_char_to_str(val));
 	
@@ -114,6 +142,7 @@ static char	*pointers(void *val, t_format_type *format_type)
 	return(ft_itoa_base((unsigned long long int)val, "0123456789abcdef", 16));
 }
 
+
 static char	*formated(va_list args, t_format_type *format_type)
 {
 	if (format_type->type == 'c')
@@ -135,9 +164,9 @@ static char	*formated(va_list args, t_format_type *format_type)
 
 char	*get_format(char *string, va_list args, t_format_type *format_type)
 {
-	int			i;
-	char			*end_word;
-	char			*formated_word;
+	int	i;
+	char	*end_word;
+	char	*formated_word;
 
 	i = 0;
 	while (string[i] && !ft_is_in_charset(string[i], "csuipdxXfegn"))
@@ -149,5 +178,5 @@ char	*get_format(char *string, va_list args, t_format_type *format_type)
 	free(string);
 	string = NULL;
 	formated_word = formated(args, format_type);
-	return (ft_strjoin_free(&formated_word, &end_word));
+	return (ft_strjoin_free(&formated_word, &end_word, NULL));
 }
