@@ -207,14 +207,6 @@ int main()
  x		hexa (a12)
  X		hexa (A12)
  %		Prints a percent sign
- bonus types :
- --------
- f		Floating-point number, decimal notation
- e		Floating-point number, e-notation
- g		Use %f or %e, depending on the value.
- 		The %e style is used if the exponent is less
- 		than -4 or greater than or equal to the precision.
- n		truc mistique qui charge la valeur, tres intrange...
 
  flags to handle :
  ----------
@@ -223,8 +215,18 @@ int main()
 
  -		Specifies that the output value is left justified in the output field and padded with blanks on the right.
 		The default positioning of the output is right justified
- .
- *
+ .		pour les float ?
+ *		pour changer, mais je vais en chier du coup
+ 
+ bonus types :
+ --------
+ f		Floating-point number, decimal notation
+ e		Floating-point number, e-notation
+ g		Use %f or %e, depending on the value.
+ 		The %e style is used if the exponent is less
+ 		than -4 or greater than or equal to the precision.
+ n		truc mistique qui charge la valeur, tres intrange...
+ 
  Bonus flags:
  -----------
  l		devant, long

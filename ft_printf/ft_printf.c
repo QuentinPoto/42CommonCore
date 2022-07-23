@@ -11,7 +11,7 @@ int	ft_printf(const char *string, ...)
 	char		**words;
 	int		res;
 	char		*to_add;
-	t_format_type	format_type;
+	t_format_type	format_type; // TODO : separer pour chaque partie (pas que le meme comme mtn)
 
 	format_type.null_count = 0;
 	va_start(args, string);

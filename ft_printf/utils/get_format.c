@@ -65,27 +65,42 @@ char	*ft_spe_itoa(void *n, int type)
 	return (res);
 }
 */
+
+enum e_bool {
+	FALSE,
+	TRUE,
+	SUCCESS = 0,
+	ERROR = 1,
+};
+
 static char	*add_space(t_format_type *format_type, char **string)
 {
 	char	*res;
 	int	c;
 	int	i;
+	int	is_neg;
 
 	i = 0;
 	while (format_type->flag[i] && !ft_is_in_charset(format_type->flag[i], "-+0123456789"))
 		i++;
 	c = ft_atoi(&format_type->flag[i]);
-	if (c == 0)
+	is_neg = FALSE;
+	if (c < 0)
+	{
+		is_neg = TRUE;
+		c = -c;
+	}
+
+	if (c == 0 || c - ft_strlen(*string) == 0)
 		return (NULL);
 	c -= ft_strlen(*string);
-	
-	
-	if (c < 0)
-		c = -c;	
 	res = malloc(c + 1);
 	ft_memset(res, ' ', c);
 	res[c] = '\0';
-	return (res);
+	if (is_neg)
+		return (ft_strjoin_free(string, &res, NULL));
+	else
+		return (ft_strjoin_free(&res, string, NULL));
 }
 
 static char	*character(unsigned int val, t_format_type *format_type)
@@ -93,12 +108,16 @@ static char	*character(unsigned int val, t_format_type *format_type)
 	char	*res;
 
 
-	if ((char)val == '\0') 
+	if ((char)val == '\0'/* && format_type->*/) // TODO : que si ya pas de 0
 	{
 		format_type->null_count++;
 		if (format_type->first_null == -1)
 			format_type->first_null = format_type->ccount;
 	}
+	char	*temp = ft_char_to_str(val);
+	res = add_space(format_type, &temp);
+	if (res)
+		return (res);
 	return (ft_char_to_str(val));
 	
 }
@@ -160,6 +179,11 @@ static char	*formated(va_list args, t_format_type *format_type)
 		return (hexa(va_arg(args, unsigned long long int), format_type));
 		//return (hexa(va_arg(args, unsigned int), format_type));
 	return (0);
+}
+
+static void	set_format_type(t_format_type *format_type)
+{
+	// TODO : set tout les parametres t_format_type pour les avoirs partout
 }
 
 char	*get_format(char *string, va_list args, t_format_type *format_type)
